@@ -1,8 +1,86 @@
-.App {
+.row, .error-message {
+  flex: 1
 }
 
-.App-header {
-  background: #34495e;
-  font-family: Arial;
-  height: 46px;
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8vh;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.step, .last-step {
+  font-size: 8vh;
+  color: white;
+}
+
+.step {
+  background: green;
+}
+
+.last-step {
+  background: red;
+}
+
+.step, .last-step, .turtle, .no-turtle {
+  margin: .1em;
+  padding: .3em 1em;
+  border-radius: 3px;
+  flex: 1;
+  display: flex;
+}
+
+.no-turtle {
+  display: block;
+  position: relative;
+}
+
+.turtle, .no-turtle::after {
+  background-image: url("/turtle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.no-turtle::after {
+  content: "";
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.item {
+  margin: auto;
+  text-align: center;
+}
+
+.next-row {
+  flex: 0.2;
+  display: flex;
+}
+
+.next-margin, .next-button {
+  flex: 1
+}
+
+.next-button {
+  background-color: royalblue;
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: .1em;
+  padding: .3em 1em;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 6vh;
 }

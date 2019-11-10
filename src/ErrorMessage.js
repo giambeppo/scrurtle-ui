@@ -5,19 +5,9 @@ class ErrorMessage extends Component {
         if (!this.props.errorMessage) {
             return null;
         }
-        let tryAgain;
-        if (this.props.tryAgain) {
-            tryAgain = (
-                <div>
-                    <br/>
-                    Please try again in a few minutes.
-                </div>
-            )
-        }
         return (
-            <div>
+            <div className="error-message">
                 <strong>{this.props.errorMessage}</strong>
-                {tryAgain}
             </div>
         )
     }
