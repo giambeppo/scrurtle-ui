@@ -1,4 +1,4 @@
-const baseUrl = 'https://my.api.endpoint/scrurtle?counter=';
+const baseUrl = process.env.REACT_APP_BASE_SCRURTLE_URL + '?counter=';
 
 export const getUrl = counter => baseUrl + counter;
 export const incrementUrl = counter => baseUrl + counter + '&after=increment';

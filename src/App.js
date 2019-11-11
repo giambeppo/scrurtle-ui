@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import './App.css';
-import ErrorMessage from "./ErrorMessage";
-import Path from "./Path";
+import ErrorMessage from './ErrorMessage';
+import Path from './Path';
 import * as Utils from './utils';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter: "maya",
-            size: 5,
-            current: 0
+            counter: 'maya',
+            size: 5
         };
         // This binding is necessary to make `this` work in the callback
         this.loadInfo = this.loadInfo.bind(this);
@@ -22,42 +21,39 @@ class App extends Component {
     }
 
     async loadInfo() {
-        try {
-            const response = await fetch(Utils.getUrl(this.state.counter));
-            if (response.status === 200) {
-                const json = await response.json();
-                this.setState({
-                    current: json.value
-                });
-            } else {
-                throw new Error('HTTP ' + response.status + ' ' + response.statusText);
-            }
-        } catch(ex) {
-            this.setState({
-                error: "Error"
-            });
-        }
+        await this.wrapRequest(fetch(Utils.getUrl(this.state.counter)));
     }
 
     async nextStep() {
+        let promise;
+        if (this.state.current >= this.state.size - 1) {
+            promise = fetch(Utils.resetUrl(this.state.counter));
+        } else {
+            promise = fetch(Utils.incrementUrl(this.state.counter));
+        }
+        await this.wrapRequest(promise)
+    }
+
+    async wrapRequest(requestPromise) {
+        this.setState({
+            loading: true
+        });
         try {
-            let response;
-            if (this.state.current >= this.state.size - 1) {
-                response = await fetch(Utils.resetUrl(this.state.counter));
-            } else {
-                response = await fetch(Utils.incrementUrl(this.state.counter));
-            }
+            const response = await requestPromise;
             if (response.status === 200) {
                 const json = await response.json();
+                const newValue = json.value % this.state.size;
                 this.setState({
-                    current: json.value
+                    current: newValue,
+                    loading: false
                 });
             } else {
                 throw new Error('HTTP ' + response.status + ' ' + response.statusText);
             }
         } catch(ex) {
             this.setState({
-                error: "Error"
+                error: 'Error: ' + ex.message,
+                loading: false
             });
         }
     }
@@ -69,7 +65,9 @@ class App extends Component {
                 <ErrorMessage errorMessage={this.state.error} />
                 <div className="next-row">
                     <div className="next-margin" />
-                    <button className="next-button" onClick={this.nextStep}>Next</button>
+                    <button className="next-button" disabled={this.state.loading} onClick={this.nextStep}>
+                        Next
+                    </button>
                     <div className="next-margin" />
                 </div>
             </div>

@@ -84,3 +84,7 @@
   text-align: center;
   font-size: 6vh;
 }
+
+.next-button:disabled {
+  background-color: lightskyblue;
+}

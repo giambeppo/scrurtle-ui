@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Step from "./Step";
+import Step from './Step';
 
 class Path extends Component {
     render() {
