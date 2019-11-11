@@ -41,7 +41,7 @@
 }
 
 .turtle, .no-turtle::after {
-  background-image: url("/turtle.png");
+  background-image: url("./turtle.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
