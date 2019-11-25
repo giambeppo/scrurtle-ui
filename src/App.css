@@ -1,8 +1,10 @@
-.row, .error-message {
-  flex: 1
+.error-message {
+  flex: 1;
+  color: red;
 }
 
 .row {
+  flex: 1;
   display: flex;
   flex-direction: row;
   margin-bottom: 8vh;
@@ -68,7 +70,7 @@
   display: flex;
 }
 
-.next-margin, .next-button {
+.margin, .next-button {
   flex: 1
 }
 
@@ -87,4 +89,9 @@
 
 .next-button:disabled {
   background-color: lightskyblue;
+}
+
+.audit-row {
+  flex: 0.1;
+  display: flex;
 }
